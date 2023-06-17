@@ -1,12 +1,30 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Cell from "./Cell";
-import {cellsArray} from "../utils/cellsArray";
 
 const Game = () => {
+  const [cellsArray, setCellsArray] = useState([
+    {key: 1, isChecked: false},
+    {key: 2, isChecked: false},
+    {key: 3, isChecked: false},
+    {key: 4, isChecked: false},
+    {key: 5, isChecked: false},
+    {key: 6, isChecked: false},
+    {key: 7, isChecked: false},
+    {key: 8, isChecked: false},
+    {key: 9, isChecked: false},
+  ])
+
+  const [isClicked, setIsClicked] = useState(false)
+
+ useEffect(() => {
+   setIsClicked(false)
+ }, [isClicked])
 
   function clickCell(num) {
-    const checkedCell = cellsArray.find(number => number.key === num);
-    checkedCell.isChecked = true;
+    const newCellsArray = cellsArray;
+    newCellsArray[num-1].isChecked = true;
+    setCellsArray(newCellsArray)
+    setIsClicked(true)
   }
 
   return (

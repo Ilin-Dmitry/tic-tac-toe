@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {cellsArray} from "../utils/cellsArray";
 
 const Cell = ({number, onClick, isChecked}) => {
-  // console.log(number, isChecked)
   const [isClicked, setIsClicked] = useState(false);
   const [sign, setSign] = useState('')
   function clickCell() {
@@ -10,6 +8,8 @@ const Cell = ({number, onClick, isChecked}) => {
     setIsClicked(true)
   }
 
+
+  // Проверить необходимость эффекта - setSign можно перенести в clickCell
   useEffect(() => {
     isClicked && setSign('x')
     console.log('ischeked',isChecked)
