@@ -43,6 +43,7 @@ const Game = () => {
     const freeCellsArray = cellsArray.filter(cell => {
       return (cell.isChecked === false)
     })
+
     const randomFreeCell = freeCellsArray[Math.floor(Math.random()*freeCellsArray.length)]
     if (randomFreeCell) {
       checkCell(randomFreeCell.key - 1, 'o' + ' ' + randomFreeCell.key) // убрать последний randomFreeCell.key
