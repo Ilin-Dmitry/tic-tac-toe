@@ -1,12 +1,23 @@
 import winKeys from "./winKeys";
 
-export function moveToWin(freeCells, userCells, computerCells) {
-  const almostXWon = winKeys.find(winKey => {
+function findAlmostWon(freeCells, userCells, computerCells) {
+  return winKeys.find(winKey => {
     return winKey.filter(num => userCells.includes(num)).length === 2 && winKey.filter(num => computerCells.includes(num)).length === 0
   })
-  const almostOWon = winKeys.find(winKey => {
-    return winKey.filter(num => computerCells.includes(num)).length === 2 && winKey.filter(num => userCells.includes(num)).length === 0
-  })
+}
+
+function findCellsToMove(freeCells, whoAlmostWon) {
+  const bestKeysToChoose = whoAlmostWon.flat(1)
+  const freeCellsToMove = freeCells.filter(cell => {
+    return bestKeysToChoose.includes(cell.key)
+  }).map(cell => cell.key)
+  const chosenFreeKey = freeCellsToMove[Math.floor(Math.random()*freeCellsToMove.length)]
+  return chosenFreeKey ? chosenFreeKey : freeCells[Math.floor(Math.random()* freeCells.length)].key;
+}
+
+export function moveToWin(freeCells, userCells, computerCells) {
+  const almostXWon = findAlmostWon(freeCells, userCells, computerCells)
+  const almostOWon = findAlmostWon(freeCells, computerCells, userCells)
 
   if (userCells.length === 1 && userCells.includes(5)) {
     const possibleMoves = [1, 3, 7, 9]
@@ -14,39 +25,12 @@ export function moveToWin(freeCells, userCells, computerCells) {
   } else if (userCells.length === 1 && !userCells.includes(5)) {
     return 5
   } else if (almostXWon && almostOWon) {
-    console.log('отработали обе', almostXWon, almostOWon)
-      const bestKeysToChoose = almostOWon.flat(1)
-      const freeCellsToMove = freeCells.filter(cell => {
-        return bestKeysToChoose.includes(cell.key)
-      }).map(cell => cell.key)
-      const chosenFreeKey = freeCellsToMove[Math.floor(Math.random()*freeCellsToMove.length)]
-      return chosenFreeKey ? chosenFreeKey : freeCells[Math.floor(Math.random()* freeCells.length)].key;
-
+    return findCellsToMove(freeCells, almostOWon)
   } else if (almostXWon) {
-    console.log('отработала almostXWon')
-    const bestKeysToChoose = almostXWon.flat(1)
-    const freeCellsToMove = freeCells.filter(cell => {
-      return bestKeysToChoose.includes(cell.key)
-    }).map(cell => cell.key)
-    const chosenFreeKey = freeCellsToMove[Math.floor(Math.random()*freeCellsToMove.length)]
-
-    return chosenFreeKey ? chosenFreeKey : freeCells[Math.floor(Math.random()* freeCells.length)].key;
+    return findCellsToMove(freeCells, almostXWon)
   } else if (almostOWon) {
-    console.log('отработала almostOWon')
-
-
-    const bestKeysToChoose = almostOWon.flat(1)
-    const freeCellsToMove = freeCells.filter(cell => {
-      return bestKeysToChoose.includes(cell.key)
-    }).map(cell => cell.key)
-    const chosenFreeKey = freeCellsToMove[Math.floor(Math.random()*freeCellsToMove.length)]
-
-    return chosenFreeKey ? chosenFreeKey : freeCells[Math.floor(Math.random()* freeCells.length)].key;
+    return findCellsToMove(freeCells, almostOWon)
   } else  {
-    console.log('random');
-
     return freeCells[Math.floor(Math.random()* freeCells.length)].key;
-
   }
-
 }
