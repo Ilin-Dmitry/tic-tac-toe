@@ -6,22 +6,19 @@ function checkIsWin(cellsToCheck) {
   })
 }
 
+function findCheckedCells(cellsArray, sign) {
+  return cellsArray.map(cell => {
+    if (cell.isChecked && cell.sign.startsWith(sign)) return cell.key
+  }).filter(Boolean)
+}
+
 export function checkVictoryConditions(cellsArray) {
-  const xCheckedCells = cellsArray.map(cell => {
-    if (cell.isChecked && cell.sign.startsWith('x')) return cell.key
-  }).filter(Boolean)
+  const xWins = checkIsWin(findCheckedCells(cellsArray, 'x'))
+  const oWins = checkIsWin(findCheckedCells(cellsArray, 'o'))
 
-  const oCheckedCells = cellsArray.map(cell => {
-    if (cell.isChecked && cell.sign.startsWith('o')) return cell.key
-  }).filter(Boolean)
-
-  const xWins = checkIsWin(xCheckedCells)
-  const oWins = checkIsWin(oCheckedCells)
-
-  if (xCheckedCells.length > 2 && xWins) {
+  if (findCheckedCells(cellsArray, 'x').length > 2 && xWins) {
     return console.log('x wins')
-  } else if (oCheckedCells.length > 2 && oWins) {
+  } else if (findCheckedCells(cellsArray, 'o').length > 2 && oWins) {
     return console.log('o wins')
   }
-
 }
