@@ -24,7 +24,6 @@ const Game = () => {
 
   function markCell(num, symbol) {
     const newCellsArray = cellsArray;
-    // console.log('newCellsArray[num] =>', newCellsArray[num])
     newCellsArray[num].isChecked = true;
     newCellsArray[num].sign = symbol;
     setCellsArray(newCellsArray)
@@ -32,7 +31,6 @@ const Game = () => {
   }
 
   function clickCell(num) {
-    // markCell(num - 1, 'x' + ' ' + num) // убрать последний num
     markCell(num - 1, 'x')
     checkVictoryConditions(cellsArray)
     setCountermove()
@@ -56,15 +54,12 @@ const Game = () => {
         if (cell.isChecked && cell.sign.startsWith('o')) return cell.key
       }).filter(Boolean)
       const move = moveToWin(freeCellsArray, xCells, oCells) - 1
-      // markCell(move, 'o' + ' ' + randomFreeCell.key) // убрать последний randomFreeCell.key
       markCell(move, 'o')
       checkVictoryConditions(cellsArray)
     } else {
       finishGame()
     }
   }
-
-
 
   return (
       <div className="game">
