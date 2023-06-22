@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Cell from "./Cell";
 import {checkVictoryConditions} from "../utils/checkWin";
+import {moveToWin} from "../utils/winStrategy";
 
 const Game = () => {
   const [cellsArray, setCellsArray] = useState([
@@ -21,8 +22,9 @@ const Game = () => {
    setIsClicked(false)
  }, [isClicked])
 
-  function checkCell(num, symbol) {
+  function markCell(num, symbol) {
     const newCellsArray = cellsArray;
+    console.log('newCellsArray[num] =>', newCellsArray[num])
     newCellsArray[num].isChecked = true;
     newCellsArray[num].sign = symbol;
     setCellsArray(newCellsArray)
@@ -30,7 +32,7 @@ const Game = () => {
   }
 
   function clickCell(num) {
-    checkCell(num - 1, 'x' + ' ' + num) // убрать последний num
+    markCell(num - 1, 'x' + ' ' + num) // убрать последний num
     checkVictoryConditions(cellsArray)
     setCountermove()
   }
@@ -46,7 +48,14 @@ const Game = () => {
 
     const randomFreeCell = freeCellsArray[Math.floor(Math.random()*freeCellsArray.length)]
     if (randomFreeCell) {
-      checkCell(randomFreeCell.key - 1, 'o' + ' ' + randomFreeCell.key) // убрать последний randomFreeCell.key
+      const xCells = cellsArray.map(cell => {
+        if (cell.isChecked && cell.sign.startsWith('x')) return cell.key
+      }).filter(Boolean)
+      const oCells = cellsArray.map(cell => {
+        if (cell.isChecked && cell.sign.startsWith('o')) return cell.key
+      }).filter(Boolean)
+      const move = moveToWin(freeCellsArray, xCells, oCells) - 1
+      markCell(move, 'o' + ' ' + randomFreeCell.key) // убрать последний randomFreeCell.key
       checkVictoryConditions(cellsArray)
     } else {
       finishGame()
