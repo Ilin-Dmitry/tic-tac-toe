@@ -1,7 +1,7 @@
 import "./index.css";
 import Game from "./components/Game";
 import Popup from "./components/Popup";
-import {useState} from "react";
+import React, {useState} from "react";
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)

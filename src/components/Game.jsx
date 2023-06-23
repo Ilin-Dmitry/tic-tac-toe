@@ -15,7 +15,8 @@ const Game = ({onFinish, winner, setWinner}) => {
  }, [isClicked])
 
   function markCell(num, symbol) {
-    const newCellsArray = cellsArray;
+    const newCellsArray = defaultCells;
+
     newCellsArray[num].isChecked = true;
     newCellsArray[num].sign = symbol;
     setCellsArray(newCellsArray)
@@ -23,7 +24,6 @@ const Game = ({onFinish, winner, setWinner}) => {
   }
 
   function clickCell(num) {
-
     if (!winner && cellsArray[num-1].isChecked === false) {
       markCell(num - 1, 'x')
       checkVictoryConditions(cellsArray, defineWinner)
@@ -64,14 +64,26 @@ const Game = ({onFinish, winner, setWinner}) => {
     }
   }
 
+  function startNewGame() {
+    setCellsArray(cellsArray.map(cell => {
+      const newCell = cell
+      newCell.isChecked = false
+      newCell.sign = ''
+      return newCell
+    }))
+    setWinner('')
+    setGameOver(false)
+  }
+
   return (
-      <div>
+      <div className='game-wrapper'>
         {gameOver && <h1>{winner}</h1>}
         <div className="game">
           {cellsArray.map(cell => {
             return <Cell key={cell.key} number={cell.key} symbol={cell.sign} onClick={clickCell}/>
           })}
         </div>
+        <button className="game__refresh-button" onClick={startNewGame}>Начать заново</button>
       </div>
   );
 };
