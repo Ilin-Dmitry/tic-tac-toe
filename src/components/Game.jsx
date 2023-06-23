@@ -17,6 +17,8 @@ const Game = () => {
   ])
 
   const [isClicked, setIsClicked] = useState(false)
+  const [whoWon, setWhoWon] = useState('')
+  const [gameOver, setGameOver] = useState(false)
 
  useEffect(() => {
    setIsClicked(false)
@@ -31,13 +33,21 @@ const Game = () => {
   }
 
   function clickCell(num) {
-    markCell(num - 1, 'x')
-    checkVictoryConditions(cellsArray)
-    setCountermove()
+    if (!whoWon) {
+      markCell(num - 1, 'x')
+      checkVictoryConditions(cellsArray, defineWinner)
+      setCountermove()
+    }
+  }
+
+  function defineWinner (winner) {
+    setGameOver(true)
+    setWhoWon(winner)
   }
 
   function finishGame() {
-    console.log('game over')
+    setGameOver(true)
+    setWhoWon('draw')
   }
 
   function setCountermove() {
@@ -55,17 +65,20 @@ const Game = () => {
       }).filter(Boolean)
       const move = moveToWin(freeCellsArray, xCells, oCells) - 1
       markCell(move, 'o')
-      checkVictoryConditions(cellsArray)
+      checkVictoryConditions(cellsArray, defineWinner)
     } else {
       finishGame()
     }
   }
 
   return (
-      <div className="game">
-        {cellsArray.map(cell => {
+      <div>
+        {gameOver && <h1>{whoWon}</h1>}
+        <div className="game">
+          {cellsArray.map(cell => {
             return <Cell key={cell.key} number={cell.key} symbol={cell.sign} onClick={clickCell}/>
           })}
+        </div>
       </div>
   );
 };

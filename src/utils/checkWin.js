@@ -12,13 +12,13 @@ function findCheckedCells(cellsArray, sign) {
   }).filter(Boolean)
 }
 
-export function checkVictoryConditions(cellsArray) {
+export function checkVictoryConditions(cellsArray, setWinner) {
   const xWins = checkIsWin(findCheckedCells(cellsArray, 'x'))
   const oWins = checkIsWin(findCheckedCells(cellsArray, 'o'))
 
   if (findCheckedCells(cellsArray, 'x').length > 2 && xWins) {
-    return console.log('x wins')
+    setWinner('x wins')
   } else if (findCheckedCells(cellsArray, 'o').length > 2 && oWins) {
-    return console.log('o wins')
+    setWinner('o wins')
   }
 }
