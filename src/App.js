@@ -5,6 +5,11 @@ import {useState} from "react";
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [whoWon, setWhoWon] = useState('')
+  function setWinner(winner) {
+    setWhoWon(winner)
+  }
+
   function onGameFinish() {
     setIsPopupOpen(true)
   }
@@ -14,8 +19,8 @@ function App() {
   return (
     <div className="App">
       <h1>Игра в крестики-нолики</h1>
-      <Game onFinish={onGameFinish}/>
-      {isPopupOpen && <Popup closePopup={closePopup} children={'Something else happened'}/>}
+      <Game onFinish={onGameFinish} winner={whoWon} setWinner={setWinner}/>
+      {isPopupOpen && <Popup closePopup={closePopup} children={whoWon}/>}
 
     </div>
   );

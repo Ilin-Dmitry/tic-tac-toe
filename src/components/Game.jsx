@@ -2,22 +2,12 @@ import React, {useEffect, useState} from 'react';
 import Cell from "./Cell";
 import {checkVictoryConditions} from "../utils/checkWin";
 import {moveToWin} from "../utils/winStrategy";
+import {defaultCells} from "../utils/defaultCells";
 
-const Game = ({onFinish}) => {
-  const [cellsArray, setCellsArray] = useState([
-    {key: 1, isChecked: false, sign: ''},
-    {key: 2, isChecked: false, sign: ''},
-    {key: 3, isChecked: false, sign: ''},
-    {key: 4, isChecked: false, sign: ''},
-    {key: 5, isChecked: false, sign: ''},
-    {key: 6, isChecked: false, sign: ''},
-    {key: 7, isChecked: false, sign: ''},
-    {key: 8, isChecked: false, sign: ''},
-    {key: 9, isChecked: false, sign: ''},
-  ])
+const Game = ({onFinish, winner, setWinner}) => {
+  const [cellsArray, setCellsArray] = useState(defaultCells)
 
   const [isClicked, setIsClicked] = useState(false)
-  const [whoWon, setWhoWon] = useState('')
   const [gameOver, setGameOver] = useState(false)
 
  useEffect(() => {
@@ -33,7 +23,8 @@ const Game = ({onFinish}) => {
   }
 
   function clickCell(num) {
-    if (!whoWon) {
+
+    if (!winner && cellsArray[num-1].isChecked === false) {
       markCell(num - 1, 'x')
       checkVictoryConditions(cellsArray, defineWinner)
       setCountermove()
@@ -43,13 +34,13 @@ const Game = ({onFinish}) => {
   function defineWinner (winner) {
     setGameOver(true)
     onFinish()
-    setWhoWon(winner)
+    setWinner(winner)
   }
 
   function finishGame() {
     setGameOver(true)
     onFinish()
-    setWhoWon('draw')
+    setWinner('draw')
   }
 
   function setCountermove() {
@@ -75,7 +66,7 @@ const Game = ({onFinish}) => {
 
   return (
       <div>
-        {gameOver && <h1>{whoWon}</h1>}
+        {gameOver && <h1>{winner}</h1>}
         <div className="game">
           {cellsArray.map(cell => {
             return <Cell key={cell.key} number={cell.key} symbol={cell.sign} onClick={clickCell}/>
