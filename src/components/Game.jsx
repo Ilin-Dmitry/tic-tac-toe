@@ -3,7 +3,7 @@ import Cell from "./Cell";
 import {checkVictoryConditions} from "../utils/checkWin";
 import {moveToWin} from "../utils/winStrategy";
 
-const Game = () => {
+const Game = ({onFinish}) => {
   const [cellsArray, setCellsArray] = useState([
     {key: 1, isChecked: false, sign: ''},
     {key: 2, isChecked: false, sign: ''},
@@ -42,11 +42,13 @@ const Game = () => {
 
   function defineWinner (winner) {
     setGameOver(true)
+    onFinish()
     setWhoWon(winner)
   }
 
   function finishGame() {
     setGameOver(true)
+    onFinish()
     setWhoWon('draw')
   }
 
