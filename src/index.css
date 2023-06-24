@@ -36,6 +36,18 @@
     font-size: 30px;
 }
 
+.game__button_color_green {
+    color: #1bff1b;
+}
+
+.game__button_color_blue {
+    color: #67befc;
+}
+
+.game__button_color_red {
+    color: red;
+}
+
 .game__refresh-button {
     margin: 50px auto 30px;
     background-color: transparent;
