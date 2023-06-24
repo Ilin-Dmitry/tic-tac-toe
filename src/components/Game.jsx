@@ -9,6 +9,7 @@ const Game = ({onFinish, winner, setWinner}) => {
 
   const [isClicked, setIsClicked] = useState(false)
   const [gameOver, setGameOver] = useState(false)
+  const [winCells, setWinCells] = useState([])
 
  useEffect(() => {
    setIsClicked(false)
@@ -26,7 +27,7 @@ const Game = ({onFinish, winner, setWinner}) => {
   function clickCell(num) {
     if (!winner && cellsArray[num-1].isChecked === false) {
       markCell(num - 1, 'x')
-      checkVictoryConditions(cellsArray, defineWinner)
+      checkVictoryConditions(cellsArray, defineWinner, defineWinCells)
       setCountermove()
     }
   }
@@ -35,6 +36,10 @@ const Game = ({onFinish, winner, setWinner}) => {
     setGameOver(true)
     onFinish()
     setWinner(winner)
+  }
+
+  function defineWinCells(winCells) {
+    setWinCells(winCells)
   }
 
   function finishGame() {
@@ -58,7 +63,7 @@ const Game = ({onFinish, winner, setWinner}) => {
       }).filter(Boolean)
       const move = moveToWin(freeCellsArray, xCells, oCells) - 1
       markCell(move, 'o')
-      checkVictoryConditions(cellsArray, defineWinner)
+      checkVictoryConditions(cellsArray, defineWinner, defineWinCells)
     } else {
       finishGame()
     }
@@ -80,7 +85,7 @@ const Game = ({onFinish, winner, setWinner}) => {
         {gameOver && <h1>{winner}</h1>}
         <div className="game">
           {cellsArray.map(cell => {
-            return <Cell key={cell.key} number={cell.key} symbol={cell.sign} onClick={clickCell}/>
+            return <Cell key={cell.key} number={cell.key} symbol={cell.sign} onClick={clickCell} winCells={winCells}/>
           })}
         </div>
         <button className="game__refresh-button" onClick={startNewGame}>Начать заново</button>

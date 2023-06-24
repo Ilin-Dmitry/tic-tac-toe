@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 
-const Cell = ({number, onClick, symbol}) => {
-
+const Cell = ({number, onClick, symbol, winCells}) => {
   const [color, setColor] = useState('')
   useEffect(() => {
     setColor(() => {
-      if (symbol === 'x') return 'game__button_color_green'
+      if (winCells.includes(number)) return 'game__button_color_red'
+      else if (symbol === 'x') return 'game__button_color_green'
       else if (symbol === 'o') return 'game__button_color_blue'
       else return ''
     })
-  }, [symbol])
+  }, [symbol, winCells])
 
 
   function clickCell() {

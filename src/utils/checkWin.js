@@ -1,7 +1,7 @@
 import winKeys from "./winKeys";
 
 function checkIsWin(cellsToCheck) {
-  return winKeys.some(key => {
+  return winKeys.find(key => {
     return key.every(num => cellsToCheck.includes(num))
   })
 }
@@ -12,13 +12,15 @@ function findCheckedCells(cellsArray, sign) {
   }).filter(Boolean)
 }
 
-export function checkVictoryConditions(cellsArray, setWinner) {
+export function checkVictoryConditions(cellsArray, setWinner, setWinCells) {
   const xWins = checkIsWin(findCheckedCells(cellsArray, 'x'))
   const oWins = checkIsWin(findCheckedCells(cellsArray, 'o'))
 
   if (findCheckedCells(cellsArray, 'x').length > 2 && xWins) {
     setWinner('x wins')
+    setWinCells(xWins)
   } else if (findCheckedCells(cellsArray, 'o').length > 2 && oWins) {
     setWinner('o wins')
+    setWinCells(oWins)
   }
 }
