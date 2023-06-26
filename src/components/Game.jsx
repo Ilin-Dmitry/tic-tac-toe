@@ -8,7 +8,6 @@ const Game = ({onFinish, winner, setWinner}) => {
   const [cellsArray, setCellsArray] = useState(defaultCells)
 
   const [isClicked, setIsClicked] = useState(false)
-  const [gameOver, setGameOver] = useState(false)
   const [winCells, setWinCells] = useState([])
 
  useEffect(() => {
@@ -33,7 +32,6 @@ const Game = ({onFinish, winner, setWinner}) => {
   }
 
   function defineWinner (winner) {
-    setGameOver(true)
     onFinish()
     setWinner(winner)
   }
@@ -43,7 +41,6 @@ const Game = ({onFinish, winner, setWinner}) => {
   }
 
   function finishGame() {
-    setGameOver(true)
     onFinish()
     setWinner('draw')
   }
@@ -77,7 +74,6 @@ const Game = ({onFinish, winner, setWinner}) => {
       return newCell
     }))
     setWinner('')
-    setGameOver(false)
     setWinCells([])
   }
 
