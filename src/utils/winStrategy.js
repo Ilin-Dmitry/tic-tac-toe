@@ -22,15 +22,20 @@ export function moveToWin(freeCells, userCells, computerCells) {
   if (userCells.length === 1 && userCells.includes(5)) {
     const possibleMoves = [1, 3, 7, 9]
     return possibleMoves[Math.floor(Math.random()* possibleMoves.length)]
-  } else if (userCells.length === 1 && !userCells.includes(5)) {
+  }
+  else if (userCells.length === 1 && !userCells.includes(5)) {
     return 5
-  } else if (almostXWon && almostOWon) {
+  }
+  else if (almostXWon && almostOWon) {
     return findCellsToMove(freeCells, almostOWon)
-  } else if (almostXWon) {
+  }
+  else if (almostXWon) {
     return findCellsToMove(freeCells, almostXWon)
-  } else if (almostOWon) {
+  }
+  else if (almostOWon) {
     return findCellsToMove(freeCells, almostOWon)
-  } else  {
+  }
+  else  {
     return freeCells[Math.floor(Math.random()* freeCells.length)].key;
   }
 }
