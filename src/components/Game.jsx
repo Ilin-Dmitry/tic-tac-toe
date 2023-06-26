@@ -78,11 +78,11 @@ const Game = ({onFinish, winner, setWinner}) => {
     }))
     setWinner('')
     setGameOver(false)
+    setWinCells([])
   }
 
   return (
       <div className='game-wrapper'>
-        {gameOver && <h1>{winner}</h1>}
         <div className="game">
           {cellsArray.map(cell => {
             return <Cell key={cell.key} number={cell.key} symbol={cell.sign} onClick={clickCell} winCells={winCells}/>
