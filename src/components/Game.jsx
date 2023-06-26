@@ -6,7 +6,6 @@ import {defaultCells} from "../utils/defaultCells";
 
 const Game = ({onFinish, winner, setWinner}) => {
   const [cellsArray, setCellsArray] = useState(defaultCells)
-
   const [isClicked, setIsClicked] = useState(false)
   const [winCells, setWinCells] = useState([])
 
@@ -16,9 +15,9 @@ const Game = ({onFinish, winner, setWinner}) => {
 
   function markCell(num, symbol) {
     const newCellsArray = defaultCells;
-
     newCellsArray[num].isChecked = true;
     newCellsArray[num].sign = symbol;
+
     setCellsArray(newCellsArray)
     setIsClicked(true)
   }
@@ -31,7 +30,7 @@ const Game = ({onFinish, winner, setWinner}) => {
     }
   }
 
-  function defineWinner (winner) {
+  function defineWinner(winner) {
     onFinish()
     setWinner(winner)
   }
@@ -40,29 +39,35 @@ const Game = ({onFinish, winner, setWinner}) => {
     setWinCells(winCells)
   }
 
-  function finishGame() {
+  function finishGameWithDraw() {
     onFinish()
     setWinner('draw')
   }
 
-  function setCountermove() {
-    const freeCellsArray = cellsArray.filter(cell => {
+  function findFreeCells() {
+    return cellsArray.filter(cell => {
       return (cell.isChecked === false)
     })
+  }
 
+  function findCellsWith(letter) {
+    return cellsArray.map(cell => {
+      if (cell.isChecked && cell.sign.startsWith(letter)) return cell.key
+    }).filter(Boolean)
+  }
+
+  function setCountermove() {
+    const freeCellsArray = findFreeCells()
     const randomFreeCell = freeCellsArray[Math.floor(Math.random()*freeCellsArray.length)]
+
     if (randomFreeCell) {
-      const xCells = cellsArray.map(cell => {
-        if (cell.isChecked && cell.sign.startsWith('x')) return cell.key
-      }).filter(Boolean)
-      const oCells = cellsArray.map(cell => {
-        if (cell.isChecked && cell.sign.startsWith('o')) return cell.key
-      }).filter(Boolean)
+      const xCells = findCellsWith('x')
+      const oCells = findCellsWith('o')
       const move = moveToWin(freeCellsArray, xCells, oCells) - 1
       markCell(move, 'o')
       checkVictoryConditions(cellsArray, defineWinner, defineWinCells)
     } else {
-      finishGame()
+      finishGameWithDraw()
     }
   }
 
