@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <h1>Игра в крестики-нолики</h1>
       <Game onFinish={onGameFinish} winner={whoWon} setWinner={setWinner}/>
-      {isPopupOpen && <Popup closePopup={closePopup} children={whoWon}/>}
+      {/*{isPopupOpen && <Popup closePopup={closePopup} children={whoWon}/>}*/}
 
     </div>
   );

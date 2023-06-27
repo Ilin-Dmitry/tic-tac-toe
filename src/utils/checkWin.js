@@ -19,8 +19,10 @@ export function checkVictoryConditions(cellsArray, setWinner, setWinCells) {
   if (findCheckedCells(cellsArray, 'x').length > 2 && xWins) {
     setWinner('x wins')
     setWinCells(xWins)
+    return 'x wins'
   } else if (findCheckedCells(cellsArray, 'o').length > 2 && oWins) {
     setWinner('o wins')
     setWinCells(oWins)
+    return 'o wins'
   }
 }

@@ -26,7 +26,9 @@ const Game = ({onFinish, winner, setWinner}) => {
     if (!winner && cellsArray[num-1].isChecked === false) {
       markCell(num - 1, 'x')
       checkVictoryConditions(cellsArray, defineWinner, defineWinCells)
-      setTimeout(setCountermove, 500)
+      if (!checkVictoryConditions(cellsArray, defineWinner, defineWinCells)) {
+        setTimeout(setCountermove, 500)
+      }
     }
   }
 
