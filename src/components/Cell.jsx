@@ -17,7 +17,7 @@ const Cell = ({number, onClick, symbol, winCells}) => {
   }
 
   return (
-      <button className={`game__button ${color}`} onClick={clickCell}>{symbol}</button>
+      <button className={`game__button ${color}`} onClick={clickCell}><p>{symbol}</p></button>
   );
 };
 

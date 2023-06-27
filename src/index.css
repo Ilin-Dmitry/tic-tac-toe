@@ -1,3 +1,12 @@
+@keyframes softAppear {
+    0% {
+        color: black;
+    }
+    100% {
+        color: var(--custom-color);
+    }
+}
+
 *,
 *:before,
 *:after {
@@ -31,21 +40,34 @@
 
 .game__button {
     background-color: black;
-    color: white;
+    color: black;
     border: none;
     font-size: 30px;
+    cursor: pointer;
+}
+
+.game__button p {
+    display: block;
+    animation: softAppear 3s ease-in;
 }
 
 .game__button_color_green {
     color: #1bff1b;
+    --custom-color: #1bff1b;
+    animation: softAppear .3s;
+
 }
 
 .game__button_color_blue {
     color: #67befc;
+    --custom-color: #67befc;
+    animation: softAppear .3s;
 }
 
 .game__button_color_red {
     color: red;
+    --custom-color: red;
+    animation: softAppear .3s;
 }
 
 .game__refresh-button {
