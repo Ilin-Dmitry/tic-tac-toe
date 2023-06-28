@@ -7,6 +7,11 @@
     }
 }
 
+@keyframes topAppear {
+    0% {top: -100%}
+    100% {top: 50%}
+}
+
 *,
 *:before,
 *:after {
@@ -87,7 +92,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba(45, 45, 45, .6);
 }
 
 .popup__content {
@@ -96,15 +101,16 @@
     left: 50%;
     width: 90%;
     height: 90%;
-    max-width: 700px;
-    max-height: 400px;
+    max-width: 500px;
+    max-height: 150px;
     border-radius: 5px;
-    background-color: #ccc;
-    color: #131313;
+    background-color: #000;
+    color: #1bff1b;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: topAppear 1.5s;
 }
 
 .popup__close {
