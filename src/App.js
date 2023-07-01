@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <h1>Игра в крестики-нолики</h1>
       <Game onFinish={onGameFinish} winner={whoWon} setWinner={setWinner}/>
-      <CSSTransition in={isPopupOpen} classNames="popup" timeout={3000} unmountOnExit>
+      <CSSTransition in={isPopupOpen} classNames="popup" timeout={300} unmountOnExit>
         <Popup closePopup={closePopup} children={whoWon}/>
       </CSSTransition>
 

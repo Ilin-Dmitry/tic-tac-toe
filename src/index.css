@@ -1,17 +1,3 @@
-/* @keyframes softAppear {
-    0% {
-        color: black;
-    }
-    100% {
-        color: var(--custom-color);
-    }
-}
-
-@keyframes topAppear {
-    0% {top: -100%}
-    100% {top: 50%}
-} */
-
 *,
 *:before,
 *:after {
@@ -25,6 +11,7 @@
     min-height: 100vh;
     background-color: #131313;
     color: #fff;
+    font-family: sans-serif;
 }
 
 .game-wrapper {
@@ -120,7 +107,9 @@
     max-height: 150px;
     border-radius: 5px;
     background-color: #000;
-    color: #1bff1b;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
@@ -134,7 +123,7 @@
 .popup-enter-active .popup__content {
     top: 50%;
     opacity: 1;
-    transition: opacity 300ms, top 500ms;
+    transition: opacity 300ms, top 300ms;
 }
 .popup-exit .popup__content {
     top: 50%;
@@ -143,7 +132,7 @@
 .popup-exit-active .popup__content {
     top: -100%;
     opacity: 0;
-    transition: opacity 300ms, top 500ms;
+    transition: opacity 300ms, top 300ms;
 }
 
 .popup__close {
