@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-const Popup = ({closePopup, children}) => {
+const Popup = ({closePopup, winner}) => {
 
   function closeOnEsc(e) {
     if (e.key === "Escape") closePopup()
@@ -9,6 +9,11 @@ const Popup = ({closePopup, children}) => {
     const closeButton = document.querySelector('.popup__close')
     const popup = document.querySelector('.popup')
     if (e.target === closeButton || e.target === popup) closePopup()
+  }
+  function defineMessage(winner) {
+    if (winner === 'x wins') return 'Победили крестики'
+    else if (winner === 'o wins') return 'Победили нолики'
+    else return 'Ничья'
   }
 
   useEffect(() => {
@@ -24,7 +29,7 @@ const Popup = ({closePopup, children}) => {
         
         <div className="popup__content">
           <div className="popup__close"></div>
-          <h3>{children}</h3>
+          <h3>{defineMessage(winner)}</h3>
         </div>
       </div>
   );

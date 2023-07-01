@@ -18,17 +18,17 @@ function App() {
     setIsPopupOpen(false)
   }
   return (
-    <div className="App">
-      <h1>Игра в крестики-нолики</h1>
+    <div className="app">
+      <h1 className="app__title">Игра в крестики-нолики</h1>
       <Game onFinish={onGameFinish} winner={whoWon} setWinner={setWinner}/>
       <CSSTransition in={isPopupOpen} classNames="popup"
        timeout={{
-          appear: 1500,
+          appear: 1300,
           enter: 300,
           exit: 300,
          }}
        unmountOnExit>
-        <Popup closePopup={closePopup} children={whoWon}/>
+        <Popup closePopup={closePopup} winner={whoWon}/>
       </CSSTransition>
 
     </div>

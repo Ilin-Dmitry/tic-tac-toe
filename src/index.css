@@ -6,12 +6,17 @@
     box-sizing: border-box;
 }
 
-.App {
+.app {
     width: 100vw;
     min-height: 100vh;
     background-color: #131313;
     color: #fff;
     font-family: sans-serif;
+    text-align: center;
+}
+
+.app__title {
+    padding-top: 30px;
 }
 
 .game-wrapper {
@@ -87,7 +92,7 @@
 }
 .popup-enter-active {
     opacity: 1;
-    transition: opacity 300ms 1.2s;
+    transition: opacity 300ms 1s;
 }
 .popup-exit {
     opacity: 1;
@@ -123,7 +128,7 @@
 .popup-enter-active .popup__content {
     top: 50%;
     opacity: 1;
-    transition: opacity 300ms 1.2s, top 300ms 1.2s;
+    transition: opacity 300ms 1s, top 300ms 1s;
 }
 .popup-exit .popup__content {
     top: 50%;
