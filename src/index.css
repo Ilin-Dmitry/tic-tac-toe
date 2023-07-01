@@ -1,4 +1,4 @@
-@keyframes softAppear {
+/* @keyframes softAppear {
     0% {
         color: black;
     }
@@ -10,7 +10,7 @@
 @keyframes topAppear {
     0% {top: -100%}
     100% {top: 50%}
-}
+} */
 
 *,
 *:before,
@@ -92,7 +92,22 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(45, 45, 45, .6);
+    background-color: rgba(25, 25, 25, .9);
+}
+
+.popup-enter {
+    opacity: 0;
+}
+.popup-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+.popup-exit {
+    opacity: 1;
+}
+.popup-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
 }
 
 .popup__content {
@@ -110,7 +125,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: topAppear 1.5s;
+}
+
+.popup-enter .popup__content {
+    top: -100%;
+    opacity: 0;
+}
+.popup-enter-active .popup__content {
+    top: 50%;
+    opacity: 1;
+    transition: opacity 300ms, top 500ms;
+}
+.popup-exit .popup__content {
+    top: 50%;
+    opacity: 1;
+}
+.popup-exit-active .popup__content {
+    top: -100%;
+    opacity: 0;
+    transition: opacity 300ms, top 500ms;
 }
 
 .popup__close {

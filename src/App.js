@@ -2,6 +2,7 @@ import "./index.css";
 import Game from "./components/Game";
 import Popup from "./components/Popup";
 import React, {useState} from "react";
+import {CSSTransition} from "react-transition-group";
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -20,7 +21,9 @@ function App() {
     <div className="App">
       <h1>Игра в крестики-нолики</h1>
       <Game onFinish={onGameFinish} winner={whoWon} setWinner={setWinner}/>
-      {isPopupOpen && <Popup closePopup={closePopup} children={whoWon}/>}
+      <CSSTransition in={isPopupOpen} classNames="popup" timeout={3000} unmountOnExit>
+        <Popup closePopup={closePopup} children={whoWon}/>
+      </CSSTransition>
 
     </div>
   );

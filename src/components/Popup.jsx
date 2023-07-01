@@ -21,6 +21,7 @@ const Popup = ({closePopup, children}) => {
   })
   return (
       <div className="popup">
+        
         <div className="popup__content">
           <div className="popup__close"></div>
           <h3>{children}</h3>
