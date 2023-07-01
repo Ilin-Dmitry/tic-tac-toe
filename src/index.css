@@ -87,7 +87,7 @@
 }
 .popup-enter-active {
     opacity: 1;
-    transition: opacity 300ms;
+    transition: opacity 300ms 1.2s;
 }
 .popup-exit {
     opacity: 1;
@@ -123,7 +123,7 @@
 .popup-enter-active .popup__content {
     top: 50%;
     opacity: 1;
-    transition: opacity 300ms, top 300ms;
+    transition: opacity 300ms 1.2s, top 300ms 1.2s;
 }
 .popup-exit .popup__content {
     top: 50%;
